@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id')->unique()->nullable();
             $table->foreignId('staff_member_id')->constrained()->onDelete('cascade');  // Reference to staff_members
-            $table->string('customer_name');
+            $table->string('customer_name')->nullable();
+            $table->string('customer_phone')->nullable();
+            $table->string('customer_email')->nullable();
+            $table->string('table_number')->nullable();
             $table->decimal('total_amount', 10, 2);
             $table->timestamp('order_time')->default(now());
             $table->timestamp('send_to_kitchen_time')->default(now());
