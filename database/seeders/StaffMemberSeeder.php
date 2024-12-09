@@ -14,14 +14,22 @@ class StaffMemberSeeder extends Seeder
      * Run the database seeds.
      */
 
-    public function run(): void
-    {
-        $user1 = User::where('email', 'john.doe@example.com')->first();
-        $role1 = Role::where('name', 'Admin')->first();
-        StaffMember::create(['user_id' => $user1->id, 'role_id' => $role1->id]);
+     public function run()
+     {
+         // Ensure roles are created first if not already
+         $roles = Role::all();
 
-        $user2 = User::where('email', 'jane.smith@example.com')->first();
-        $role2 = Role::where('name', 'Manager')->first();
-        StaffMember::create(['user_id' => $user2->id, 'role_id' => $role2->id]);
-    }
+         // Create staff members for each user with roles
+         $staff = [
+             ['user_id' => 1, 'role_id' => $roles->where('name', 'Admin')->first()->id],
+             ['user_id' => 2, 'role_id' => $roles->where('name', 'Manager')->first()->id],
+             ['user_id' => 3, 'role_id' => $roles->where('name', 'Chef')->first()->id],
+             ['user_id' => 4, 'role_id' => $roles->where('name', 'Waiter')->first()->id],
+             ['user_id' => 5, 'role_id' => $roles->where('name', 'Cashier')->first()->id],
+         ];
+
+         foreach ($staff as $staffMember) {
+             StaffMember::create($staffMember);
+         }
+     }
 }

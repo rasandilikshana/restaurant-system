@@ -14,8 +14,9 @@ class OrderSeeder extends Seeder
 {
     public function run(): void
     {
-        $staffMember1 = StaffMember::find(1); // Assuming staff member with ID 1 exists
-        $staffMember2 = StaffMember::find(2); // Assuming staff member with ID 2 exists
+        // Fetch staff members
+        $staffMember1 = StaffMember::find(1); // Assuming the staff member with ID 1 exists
+        $staffMember2 = StaffMember::find(2); // Assuming the staff member with ID 2 exists
 
         if ($staffMember1 && $staffMember2) {
             // Create Order 1
@@ -42,38 +43,6 @@ class OrderSeeder extends Seeder
                 'send_to_kitchen_time' => Carbon::now()->addMinutes(15),
                 'status' => 'In Progress',
                 'table_number' => 'TB02',
-            ]);
-
-            // Create Order Items for these Orders
-            $this->createOrderItems($order1, $order2);
-        }
-    }
-
-    private function createOrderItems($order1, $order2)
-    {
-        // Fetch existing menu items and concessions
-        $menuItem1 = MenuItem::find(1);
-        $menuItem2 = MenuItem::find(2);
-        $concession1 = Concession::find(1);
-        $concession2 = Concession::find(2);
-
-        if ($menuItem1 && $menuItem2) {
-            OrderItem::create([
-                'order_id' => $order1->id,
-                'menu_item_id' => $menuItem1->id,
-                'concession_id' => $concession1->id,
-                'quantity' => 2,
-                'price' => 12.99,
-                'total_price' => 25.98,
-            ]);
-
-            OrderItem::create([
-                'order_id' => $order2->id,
-                'menu_item_id' => $menuItem2->id,
-                'concession_id' => $concession2->id,
-                'quantity' => 1,
-                'price' => 8.99,
-                'total_price' => 8.99,
             ]);
         }
     }

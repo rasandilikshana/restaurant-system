@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\KitchenQueue;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ConcessionSeeder::class,    // Seed concessions
             CategorySeeder::class,      // Seed categories
             OrderSeeder::class,         // Seed orders
+            OrderItemSeeder::class,     // Seed order items
         ]);
     }
 }

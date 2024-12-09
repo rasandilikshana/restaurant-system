@@ -9,7 +9,7 @@ class MenuItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'price', 'available', 'category'];
+    protected $fillable = ['name', 'description', 'image','price', 'available', 'category'];
 
     protected $casts = [
         'price' => 'decimal:2',

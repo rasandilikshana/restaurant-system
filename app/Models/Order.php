@@ -31,4 +31,22 @@ class Order extends Model
             $order->order_id = 'OR' . ($lastOrderId + 1);  // Increment order ID with the prefix 'OR'
         });
     }
+
+    public function kitchenQueue()
+    {
+        return $this->hasOne(KitchenQueue::class);
+    }
+
+    public function sendToKitchen()
+    {
+
+        $this->status = 'Sent to Kitchen';
+        $this->save();
+
+        KitchenQueue::create([
+            'order_id' => $this->id,
+            'order_received_time' => now(),
+            'status' => 'Pending'
+        ]);
+    }
 }
