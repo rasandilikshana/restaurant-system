@@ -10,7 +10,18 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'staff_member_id', 'customer_name', 'customer_phone', 'customer_email', 'table_number', 'total_amount', 'order_time', 'send_to_kitchen_time', 'status'];
+    protected $fillable = [
+        'order_id',
+        'staff_member_id',
+        'customer_name',
+        'customer_phone',
+        'customer_email',
+        'table_number',
+        'total_amount',
+        'order_time',
+        'send_to_kitchen_time',
+        'status'
+    ];
 
     public function staffMember()
     {
@@ -39,14 +50,14 @@ class Order extends Model
 
     public function sendToKitchen()
     {
+        // Ensure that the send_to_kitchen_time is set
+        if (!$this->send_to_kitchen_time) {
+            $this->send_to_kitchen_time = now();
+            $this->save(); // Save the updated time to the database
+        }
 
-        $this->status = 'Sent to Kitchen';
+        // Update order status
+        $this->status = 'Pending';
         $this->save();
-
-        KitchenQueue::create([
-            'order_id' => $this->id,
-            'order_received_time' => now(),
-            'status' => 'Pending'
-        ]);
     }
 }

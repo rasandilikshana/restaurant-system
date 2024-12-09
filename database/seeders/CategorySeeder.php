@@ -13,21 +13,13 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        // Predefined categories for the menu items
-        $categories = [
-            'Appetizer',
-            'Main Course',
-            'Dessert',
-            'Beverage',
-            'Salads',
-            'Soup',
-            'Sides',
-            'Specials',
-        ];
-
-        // Insert each category into the categories table
-        foreach ($categories as $category) {
-            Category::create(['name' => $category]);
-        }
+        Category::create(['name' => 'Appetizer']);
+        Category::create(['name' => 'Main Course']);
+        Category::create(['name' => 'Dessert']);
+        Category::create(['name' => 'Beverage']);
+        Category::create(['name' => 'Salads']);
+        Category::create(['name' => 'Soup']);
+        Category::create(['name' => 'Sides']);
+        Category::create(['name' => 'Specials']);
     }
 }

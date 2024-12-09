@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,          // Seed roles
             UserSeeder::class,          // Seed users
             StaffMemberSeeder::class,   // Seed staff members
+            CategorySeeder::class,      // Seed categories
             MenuItemSeeder::class,      // Seed menu items
             ConcessionSeeder::class,    // Seed concessions
-            CategorySeeder::class,      // Seed categories
             OrderSeeder::class,         // Seed orders
             OrderItemSeeder::class,     // Seed order items
         ]);

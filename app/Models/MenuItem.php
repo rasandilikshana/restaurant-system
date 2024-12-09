@@ -9,7 +9,7 @@ class MenuItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'image','price', 'available', 'category'];
+    protected $fillable = ['name', 'description', 'image', 'price', 'available', 'category'];
 
     protected $casts = [
         'price' => 'decimal:2',
@@ -19,5 +19,11 @@ class MenuItem extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    // This method can be used to check if the menu item is available.
+    public function isAvailable()
+    {
+        return $this->available;
     }
 }

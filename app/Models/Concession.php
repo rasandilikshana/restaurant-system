@@ -20,4 +20,14 @@ class Concession extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    // You could consider adding an accessor to handle discounted price calculation.
+    public function getDiscountedPrice($price)
+    {
+        if ($this->discount_percentage) {
+            return $price - ($price * ($this->discount_percentage / 100));
+        }
+
+        return $price;
+    }
 }

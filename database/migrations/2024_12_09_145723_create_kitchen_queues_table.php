@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kitchen_queue', function (Blueprint $table) {
+        Schema::create('kitchen_queues', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->timestamp('order_received_time');
-            $table->enum('status', ['Pending', 'In-Progress', 'Completed'])->default('Pending');
+            $table->enum('status', ['Pending', 'In Progress', 'Completed'])->default('Pending');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kitchen_queue');
+        Schema::dropIfExists('kitchen_queues');
     }
 };

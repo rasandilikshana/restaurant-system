@@ -9,7 +9,14 @@ class OrderItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'menu_item_id', 'concession_id', 'quantity', 'price', 'total_price'];
+    protected $fillable = [
+        'order_id',
+        'menu_item_id',
+        'concession_id',
+        'quantity',
+        'price',
+        'total_price'
+    ];
 
     public function order()
     {
@@ -24,5 +31,11 @@ class OrderItem extends Model
     public function concession()
     {
         return $this->belongsTo(Concession::class);
+    }
+
+    // Accessor to calculate total price
+    public function getTotalPriceAttribute()
+    {
+        return $this->quantity * $this->price;
     }
 }
