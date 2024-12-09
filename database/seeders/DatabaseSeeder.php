@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,          // Seed users
             StaffMemberSeeder::class,   // Seed staff members
             CategorySeeder::class,      // Seed categories
+            TableSeeder::class,         // Seed tables
             MenuItemSeeder::class,      // Seed menu items
             ConcessionSeeder::class,    // Seed concessions
             OrderSeeder::class,         // Seed orders

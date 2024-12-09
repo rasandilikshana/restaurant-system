@@ -21,37 +21,37 @@ class MenuItemSeeder extends Seeder
         MenuItem::create([
             'name' => 'Pizza Margherita',
             'description' => 'Classic pizza with tomato sauce, mozzarella, and basil.',
-            'image' => 'pizza-margherita.jpg',
+            'image' => 'menu-items/01JEP5RADTGKJ6GEZSW4JA0BR3.jpg',
             'price' => 12.99,
             'available' => true,
-            'category' => $categories->where('name', 'Main Course')->first()->name, // Use category name instead of category_id
+            'category_id' => $categories->where('name', 'Main Course')->first()->id, // Correctly using category_id
         ]);
 
         MenuItem::create([
             'name' => 'Spaghetti Carbonara',
             'description' => 'Pasta with creamy carbonara sauce, bacon, and parmesan.',
-            'image' => 'spaghetti-carbonara.jpg',
+            'image' => 'menu-items/01JEP5S91CKCNSPF9SJN4FD2YQ.jpg',
             'price' => 15.99,
             'available' => true,
-            'category' => $categories->where('name', 'Main Course')->first()->name, // Use category name instead of category_id
+            'category_id' => $categories->where('name', 'Main Course')->first()->id, // Correctly using category_id
         ]);
 
         MenuItem::create([
             'name' => 'Caesar Salad',
             'description' => 'Fresh lettuce, croutons, and Caesar dressing.',
-            'image' => 'caesar-salad.jpg',
+            'image' => 'menu-items/01JEP5T2VPPB3BSB3KP5507QVN.jpg',
             'price' => 7.99,
             'available' => true,
-            'category' => $categories->where('name', 'Salads')->first()->name, // Use category name instead of category_id
+            'category_id' => $categories->where('name', 'Salads')->first()->id, // Correctly using category_id
         ]);
 
         MenuItem::create([
             'name' => 'Lemonade',
             'description' => 'Refreshing lemonade made with fresh lemons.',
-            'image' => 'lemonade.jpg',
+            'image' => 'menu-items/01JEP5XCHPPVA6P0GX25JB2XMW.jpg',
             'price' => 3.99,
             'available' => true,
-            'category' => $categories->where('name', 'Beverage')->first()->name, // Use category name instead of category_id
+            'category_id' => $categories->where('name', 'Beverage')->first()->id, // Correctly using category_id
         ]);
     }
 }

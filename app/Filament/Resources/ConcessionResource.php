@@ -27,17 +27,14 @@ class ConcessionResource extends Resource
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-
-            Forms\Components\Textarea::make('description')
-                ->nullable(),
-
+            Forms\Components\TextInput::make('description')
+                ->nullable()
+                ->maxLength(500),
             Forms\Components\TextInput::make('discount_percentage')
-                ->required()
-                ->numeric(),
-
+                ->numeric()
+                ->required(),
             Forms\Components\DatePicker::make('valid_from')
                 ->required(),
-
             Forms\Components\DatePicker::make('valid_until')
                 ->required(),
         ]);
@@ -47,10 +44,16 @@ class ConcessionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('discount_percentage')->sortable(),
-                Tables\Columns\TextColumn::make('valid_from')->sortable()->date(),
-                Tables\Columns\TextColumn::make('valid_until')->sortable()->date(),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('discount_percentage')
+                    ->label('Discount %'),
+                Tables\Columns\TextColumn::make('valid_from')
+                    ->label('Valid From')
+                    ->date(),
+                Tables\Columns\TextColumn::make('valid_until')
+                    ->label('Valid Until')
+                    ->date(),
             ])
             ->filters([
                 //

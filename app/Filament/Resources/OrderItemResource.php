@@ -18,6 +18,7 @@ class OrderItemResource extends Resource
     protected static ?string $model = OrderItem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Orders Management';
 
     public static function form(Form $form): Form
     {
@@ -25,27 +26,49 @@ class OrderItemResource extends Resource
             ->schema([
                 Forms\Components\Select::make('order_id')
                     ->relationship('order', 'customer_name')
-                    ->required(),
+                    ->required()
+                    ->label('Order')
+                    ->searchable(),
 
                 Forms\Components\Select::make('menu_item_id')
                     ->relationship('menuItem', 'name')
-                    ->required(),
+                    ->required()
+                    ->label('Menu Item')
+                    ->searchable(),
 
                 Forms\Components\Select::make('concession_id')
                     ->relationship('concession', 'name')
-                    ->nullable(),
+                    ->nullable()
+                    ->label('Concession'),
 
                 Forms\Components\TextInput::make('quantity')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1)
+                    ->label('Quantity')
+                    ->afterStateUpdated(function ($state, $set, $get) {
+                        // Update total_price when quantity or price changes
+                        $quantity = $state;
+                        $price = $get('price');
+                        $set('total_price', $quantity * $price);  // Correctly update the total_price
+                    }),
 
                 Forms\Components\TextInput::make('price')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->label('Price')
+                    ->afterStateUpdated(function ($state, $set, $get) {
+                        // Update total_price when price or quantity changes
+                        $price = $state;
+                        $quantity = $get('quantity');
+                        $set('total_price', $quantity * $price);  // Correctly update the total_price
+                    }),
 
                 Forms\Components\TextInput::make('total_price')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->disabled() // Disable total_price field so it's not editable
+                    ->label('Total Price'),
             ]);
     }
 
@@ -53,11 +76,31 @@ class OrderItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('order.customer_name'),
-                Tables\Columns\TextColumn::make('menuItem.name'),
-                Tables\Columns\TextColumn::make('concession.name'),
-                Tables\Columns\TextColumn::make('quantity'),
-                Tables\Columns\TextColumn::make('total_price'),
+                Tables\Columns\TextColumn::make('order.customer_name')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Customer Name'),
+
+                Tables\Columns\TextColumn::make('menuItem.name')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Menu Item'),
+
+                Tables\Columns\TextColumn::make('concession.name')
+                    ->sortable()
+                    ->label('Concession'),
+
+                Tables\Columns\TextColumn::make('quantity')
+                    ->sortable()
+                    ->label('Quantity'),
+
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable()
+                    ->label('Price'),
+
+                Tables\Columns\TextColumn::make('total_price')
+                    ->sortable()
+                    ->label('Total Price'),
             ])
             ->filters([
                 //

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+// use App\Models\Table;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,7 +20,7 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
-    protected static ?string $navigationGroup = 'Restaurant Management';
+    protected static ?string $navigationGroup = 'Orders Management';
 
     public static function form(Form $form): Form
     {
@@ -45,22 +46,10 @@ class OrderResource extends Resource
                     ->label('Customer Email')
                     ->nullable(),
 
-                Forms\Components\Select::make('table_number')
-                    ->label('Table Number')
-                    ->options([
-                        'TB01' => 'TB01',
-                        'TB02' => 'TB02',
-                        'TB03' => 'TB03',
-                        'TB04' => 'TB04',
-                        'TB05' => 'TB05',
-                        'TB06' => 'TB06',
-                        'TB07' => 'TB07',
-                        'TB08' => 'TB08',
-                        'TB09' => 'TB09',
-                        'TB10' => 'TB10',
-                    ])
-                    ->required()
-                    ->placeholder('Select Table'),
+                Forms\Components\Select::make('table_id')  // Foreign Key to 'tables'
+                    ->label('Table')
+                    ->relationship('table', 'name') // Display table name (or another attribute) as the label
+                    ->required(),
 
                 Forms\Components\DateTimePicker::make('send_to_kitchen_time')
                     ->required()
@@ -83,7 +72,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('customer_name')->sortable(),
                 Tables\Columns\TextColumn::make('customer_phone')->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->sortable(),
-                Tables\Columns\TextColumn::make('table_number')->sortable(),
+                Tables\Columns\TextColumn::make('table.name')->sortable(),
                 Tables\Columns\TextColumn::make('status')->badge(),
                 Tables\Columns\TextColumn::make('total_amount')->sortable()->money(),
                 Tables\Columns\TextColumn::make('send_to_kitchen_time')->sortable()->dateTime(),

@@ -7,6 +7,7 @@ use App\Filament\Resources\MenuItemResource\RelationManagers;
 use App\Models\Category;
 use App\Models\MenuItem;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -41,19 +42,28 @@ class MenuItemResource extends Resource
                     ->required(),
 
                 Select::make('category')
-                ->label('Category')
-                ->options(function () {
-                    return Category::pluck('name', 'name')->toArray();
-                })
-                ->searchable()
-                ->placeholder('Select or create category')
-                ->afterStateUpdated(function ($state, $set) {
-                    if (!Category::where('name', $state)->exists()) {
-                        // If the category doesn't exist, create it
-                        Category::create(['name' => $state]);
-                    }
-                })
-                ->required(),
+                    ->label('Category')
+                    ->options(function () {
+                        return Category::pluck('name', 'name')->toArray();
+                    })
+                    ->searchable()
+                    ->placeholder('Select or create category')
+                    ->afterStateUpdated(function ($state, $set) {
+                        if (!Category::where('name', $state)->exists()) {
+                            // If the category doesn't exist, create it
+                            Category::create(['name' => $state]);
+                        }
+                    })
+                    ->required(),
+
+                FileUpload::make('image')
+                    ->label('Image')
+                    ->image() // Ensure the uploaded file is an image
+                    ->disk('public') // Specify the disk (ensure 'public' disk is defined in config/filesystems.php)
+                    ->directory('menu-items') // Define the directory where images will be stored
+                    ->required() // Make image upload required
+                    ->maxSize(10240) // Max size in KB (10MB)
+                    ->visibility('public') // Set visibility to public so the image is accessible
             ]);
     }
 
@@ -61,10 +71,19 @@ class MenuItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('price')->sortable(),
-                Tables\Columns\TextColumn::make('available')->sortable(),
-                Tables\Columns\TextColumn::make('category')->sortable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image') // Display image in the table
+                    ->disk('public') // Use the public disk to fetch the image
+                    ->size(50), // Resize image to 50px
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->limit(50), // Limit description to 50 characters
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('category') // Show category name
+                    ->sortable(),
             ])
             ->filters([
                 //

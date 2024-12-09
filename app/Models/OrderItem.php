@@ -18,6 +18,13 @@ class OrderItem extends Model
         'total_price'
     ];
 
+    // Accessor to calculate total price dynamically
+    public function getTotalPriceAttribute()
+    {
+        return $this->quantity * $this->price;
+    }
+
+    // Other relationships...
     public function order()
     {
         return $this->belongsTo(Order::class);
@@ -31,11 +38,5 @@ class OrderItem extends Model
     public function concession()
     {
         return $this->belongsTo(Concession::class);
-    }
-
-    // Accessor to calculate total price
-    public function getTotalPriceAttribute()
-    {
-        return $this->quantity * $this->price;
     }
 }
