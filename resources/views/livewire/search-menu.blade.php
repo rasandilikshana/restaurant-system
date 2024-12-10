@@ -1,43 +1,63 @@
 <div class="p-6">
-    <div class="mb-6">
-        <input
-            type="text"
-            wire:model.debounce.300ms="query"
-            placeholder="Search categories or menu items..."
-            class="w-full p-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
-        >
+    <div class="mb-8 flex justify-end">
+        <button wire:click="placeOrder"
+            class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300">
+            Continue to Place the Order
+        </button>
+    </div>
+    <div>
+        @if (session()->has('error'))
+            <p class="text-red-500">{{ session('error') }}</p>
+        @endif
+    </div>
+    <div class="mb-6 mt-4">
+        <input type="text" wire:model.defer="query" placeholder="Search categories or menu items..."
+            class="w-full p-2 border rounded focus:ring focus:ring-blue-300">
     </div>
 
     <div>
-        @foreach($categoriesWithMenuItems as $category)
+        @foreach ($categoriesWithMenuItems as $category)
             <div class="border-b mb-4">
-                <button
-                    onclick="toggleCategory('category-{{ $category->id }}')"
-                    class="w-full text-left p-4 bg-gray-200 hover:bg-gray-300 rounded-t focus:outline-none"
-                >
-                    <span class="font-bold">{{ $category->name }}</span>
+                <button wire:click="$set('openedCategory', {{ $category->id }})"
+                    class="w-full p-4 bg-gray-200 text-left">
+                    <strong>{{ $category->name }}</strong>
                 </button>
 
-                <!-- Menu Items List (Initially Hidden) -->
-                <div id="category-{{ $category->id }}" class="hidden p-4 bg-gray-100">
-                    @if($category->menuItems->count())
-                        <ul class="list-disc pl-4">
-                            @foreach($category->menuItems as $item)
-                                <li class="py-1">{{ $item->name }}</li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p class="text-gray-500">No menu items available.</p>
-                    @endif
-                </div>
+                @if ($openedCategory === $category->id)
+                    <div class="p-4 bg-gray-50 grid grid-cols-4 gap-4">
+                        @foreach ($category->menuItems as $item)
+                            <div
+                                class="bg-white shadow-md rounded p-4 text-center hover:shadow-lg transition duration-200">
+                                <!-- Menu Item Image -->
+                                @if ($item->image)
+                                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
+                                        class="h-32 w-full object-cover rounded mb-2">
+                                @else
+                                    <div class="h-32 w-full bg-gray-200 rounded flex items-center justify-center">
+                                        <span class="text-gray-500">No Image</span>
+                                    </div>
+                                @endif
+
+                                <!-- Menu Item Name -->
+                                <h3 class="font-semibold mb-2">{{ $item->name }}</h3>
+
+                                <!-- Quantity Controls -->
+                                <div class="flex justify-center items-center space-x-2">
+                                    <button wire:click="decrementQuantity({{ $item->id }})"
+                                        class="bg-red-500 text-white px-4 py-3 rounded hover:bg-red-600">
+                                        -
+                                    </button>
+                                    <span class="text-lg font-semibold">{{ $quantities[$item->id] ?? 0 }}</span>
+                                    <button wire:click="incrementQuantity({{ $item->id }})"
+                                        class="bg-blue-500 text-white px-4 py-3 rounded hover:bg-blue-600">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>
 </div>
-
-<script>
-    function toggleCategory(id) {
-        const element = document.getElementById(id);
-        element.classList.toggle('hidden');
-    }
-</script>

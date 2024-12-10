@@ -22,10 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //data retrival
     Route::get('/get/menu-data', [DashboardController::class, 'getMenuData'])->name('get.menu-data');
-
-
-
-
+    Route::get('/order/summary', [DashboardController::class, 'orderSummary'])->name('order.summary');
 });
 
 require __DIR__ . '/auth.php';
