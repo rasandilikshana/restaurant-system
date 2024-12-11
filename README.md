@@ -22,13 +22,12 @@ Welcome to the **Restaurant Management System** project! This application is des
 
 1. [About the Project](#about-the-project)
 2. [Installation Instructions](#installation-instructions)
-3. [Environment Setup](#environment-setup)
-4. [Admin Panel Features](#admin-panel-features)
-5. [User Roles & Permissions](#user-roles--permissions)
-6. [Technologies Used](#technologies-used)
-7. [Database Architecture](#database-architecture)
-8. [Login Credentials](#login-credentials)
-9. [License](#license)
+3. [Admin Panel Features](#admin-panel-features)
+4. [User Roles & Permissions](#user-roles--permissions)
+5. [Technologies Used](#technologies-used)
+6. [Database Architecture](#database-architecture)
+7. [Login Credentials](#login-credentials)
+8. [License](#license)
 
 ## About the Project
 
