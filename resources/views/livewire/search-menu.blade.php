@@ -30,7 +30,7 @@
                                 class="bg-white shadow-md rounded p-4 text-center hover:shadow-lg transition duration-200">
                                 <!-- Menu Item Image -->
                                 @if ($item->image)
-                                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
+                                    <img src="{{ asset('storage/'.$item->image) }}" alt="{{ $item->name }}"
                                         class="h-32 w-full object-cover rounded mb-2">
                                 @else
                                     <div class="h-32 w-full bg-gray-200 rounded flex items-center justify-center">
@@ -40,6 +40,7 @@
 
                                 <!-- Menu Item Name -->
                                 <h3 class="font-semibold mb-2">{{ $item->name }}</h3>
+                                <div class="text-gray-500 mb-2">${{ number_format($item->price, 2) }}</div>
 
                                 <!-- Quantity Controls -->
                                 <div class="flex justify-center items-center space-x-2">

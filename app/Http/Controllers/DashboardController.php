@@ -24,8 +24,10 @@ class DashboardController extends Controller
         //Cashier
         else if ($roleId == 5) {
             return view('cashier.dashboard');
+
         } else if ($roleId == 1) {
             return redirect('/admin/login');
+
         } else {
             abort(403);
         }

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Order Summary') }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,11 @@
                 @foreach ($cart as $itemId => $item)
                     <div class="flex justify-between items-center border-b py-2">
                         <span>{{ $item['name'] }}</span>
-                        <span>Quantity: {{ $item['quantity'] }}</span>
+                        <div class="flex items-center space-x-4">
+                            <button wire:click="decrementQuantity({{ $itemId }})" class="bg-red-500 text-white px-2 py-2 rounded hover:bg-red-600">-</button>
+                            <span>{{ $item['quantity'] }}</span>
+                            <button wire:click="incrementQuantity({{ $itemId }})" class="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600">+</button>
+                        </div>
                     </div>
                 @endforeach
             </div>

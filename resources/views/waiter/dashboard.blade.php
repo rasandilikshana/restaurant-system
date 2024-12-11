@@ -6,20 +6,9 @@
     </x-slot>
 
     <div>
-    <div class="container mx-auto mt-10">
-        @livewire('search-menu')
-    </div>
-
-
-
-
-
-        <h3>Welcome, Waiter!</h3>
-        <p>This is the dashboard content for Waiters.</p>
+        <div class="container mx-auto mt-10">
+            @livewire('search-menu')
+        </div>
     </div>
 
 </x-app-layout>
-
-
-
-
