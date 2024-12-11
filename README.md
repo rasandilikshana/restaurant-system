@@ -1,5 +1,4 @@
 
-
 # Restaurant Management System
 
 Welcome to the **Restaurant Management System** project! This application is designed to help restaurants manage their daily operations with user roles for admins, waiters, cashiers, and chefs. It provides a full-featured CRUD system for managing menus, orders, users, and more.
@@ -75,6 +74,16 @@ Before setting up the project, ensure you have the following installed:
     ```bash
     cp .env.example .env
     ```
+    ```env
+    APP_URL=http://127.0.0.1:8000
+    
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=restaurant-system
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
 5. Generate application key:
     ```bash
@@ -100,21 +109,6 @@ Before setting up the project, ensure you have the following installed:
     ```bash
     npm run dev
     ```
-
-## Environment Setup
-
-In the `.env` file, you will find the following configuration settings:
-
-```env
-APP_URL=http://127.0.0.1:8000
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=restaurant-system
-DB_USERNAME=root
-DB_PASSWORD=
-```
 
 ## Admin Panel Features
 
@@ -154,20 +148,26 @@ You can view the database schema for the project here:
 ## Login Credentials
 
 ### Admin Login
-- Email: `admin@example.com`
-- Password: `adminpassword`
+To access the **Admin Panel**, navigate to the following URL:
+- **Admin URL**: [http://127.0.0.1:8000/admin/login](http://127.0.0.1:8000/admin/login)
+  - Email: `admin@example.com`
+  - Password: `adminpassword`
 
-### Waiter Login
-- Email: `waiter@example.com`
-- Password: `waiterpassword`
+### Staff Login
+To log in as a staff member (waiter, cashier, or chef), use the following URL:
+- **Staff URL**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+  
+  **Waiter Login**:
+  - Email: `waiter@example.com`
+  - Password: `waiterpassword`
 
-### Cashier Login
-- Email: `cashier@example.com`
-- Password: `cashierpassword`
+  **Cashier Login**:
+  - Email: `cashier@example.com`
+  - Password: `cashierpassword`
 
-### Chef Login
-- Email: `chef@example.com`
-- Password: `chefpassword`
+  **Chef Login**:
+  - Email: `chef@example.com`
+  - Password: `chefpassword`
 
 ## License
 
@@ -178,5 +178,3 @@ The Restaurant Management System is open-sourced software licensed under the **M
 For more details on configuration and extending the application, check the official [Laravel documentation](https://laravel.com/docs).
 
 If you encounter any issues or have questions, feel free to open an issue on the [GitHub repository](https://github.com/rasandilikshana/restaurant-system).
-
----
