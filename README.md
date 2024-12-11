@@ -1,66 +1,182 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+# Restaurant Management System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Welcome to the **Restaurant Management System** project! This application is designed to help restaurants manage their daily operations with user roles for admins, waiters, cashiers, and chefs. It provides a full-featured CRUD system for managing menus, orders, users, and more.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Admin Panel with CRUD operations** for managing:
+  - Categories
+  - Concessions
+  - Menu Items
+  - Tables
+  - Orders Management
+  - Order Items
+  - User Management (Roles, Staff Members, Users)
 
-## Learning Laravel
+- **Waiter**: Can place dine-in orders by adding menu items, concessions, tables, and customer details.
+- **Cashier**: Can place takeaway orders.
+- **Chef**: Can view orders, change order statuses, and mark completed orders, which will trigger notifications to the front office.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Table of Contents
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. [About the Project](#about-the-project)
+2. [Installation Instructions](#installation-instructions)
+3. [Environment Setup](#environment-setup)
+4. [Admin Panel Features](#admin-panel-features)
+5. [User Roles & Permissions](#user-roles--permissions)
+6. [Technologies Used](#technologies-used)
+7. [Database Architecture](#database-architecture)
+8. [Login Credentials](#login-credentials)
+9. [License](#license)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## About the Project
 
-## Laravel Sponsors
+The **Restaurant Management System** is a web-based application built with the **Laravel** framework. The system allows the management of all aspects of a restaurant, from managing categories and menu items to tracking orders, user roles, and notifications.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+The application uses role-based access control (RBAC) with the following roles:
 
-### Premium Partners
+- **Admin**: Full access to manage categories, menu items, staff, orders, and more.
+- **Waiter**: Can create dine-in orders and add relevant customer details.
+- **Cashier**: Handles takeaway orders.
+- **Chef**: Views orders, updates order statuses, and marks them as completed.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Installation Instructions
 
-## Contributing
+### Prerequisites
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Before setting up the project, ensure you have the following installed:
+- PHP (version 7.4+ recommended)
+- Composer (for PHP dependencies)
+- Node.js (for front-end dependencies)
+- MySQL (for database)
+- Laravel (the PHP framework)
 
-## Code of Conduct
+### Setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/rasandilikshana/restaurant-system.git
+    cd restaurant-system
+    ```
 
-## Security Vulnerabilities
+2. Install PHP dependencies using Composer:
+    ```bash
+    composer install
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Install front-end dependencies using npm:
+    ```bash
+    npm install
+    ```
+
+4. Create `.env` file:
+    ```bash
+    cp .env.example .env
+    ```
+
+5. Generate application key:
+    ```bash
+    php artisan key:generate
+    ```
+
+6. Run database migrations and seed data:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+
+7. Link storage:
+    ```bash
+    php artisan storage:link
+    ```
+
+8. Start the local development server:
+    ```bash
+    php artisan serve
+    ```
+
+9. Run the front-end development server:
+    ```bash
+    npm run dev
+    ```
+
+## Environment Setup
+
+In the `.env` file, you will find the following configuration settings:
+
+```env
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=restaurant-system
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## Admin Panel Features
+
+The **Admin Panel** provides comprehensive CRUD operations for managing the restaurant’s data. The key features include:
+
+- **Categories**: Create, update, and delete categories for organizing menu items.
+- **Concessions**: Add, update, and delete concessions (discounts) available to customers.
+- **Menu Items**: Manage menu items, including their name, description, price, image, and availability.
+- **Tables**: Manage restaurant tables, including availability and assignments.
+- **Orders Management**: View and manage orders placed by waiters and cashiers.
+- **Order Items**: Manage items within each order, such as adding/removing menu items and updating quantities.
+- **User Management**: Create, update, and delete staff members. Manage roles and permissions.
+
+## User Roles & Permissions
+
+The system uses **role-based access control (RBAC)** to define permissions for different users:
+
+- **Admin**: Full access to all features (CRUD operations on all resources).
+- **Waiter**: Can place dine-in orders, apply concessions, assign tables, and enter customer details.
+- **Cashier**: Can create and manage takeaway orders and process billing.
+- **Chef**: Views orders, updates order statuses (e.g., "In Progress", "Completed"), and sends notifications to the front office.
+
+## Technologies Used
+
+The following technologies are utilized in the development of this system:
+
+- **Laravel**: Backend framework for handling application logic, database interactions, and routing.
+- **Filament**: Admin panel package used for building the UI for CRUD operations and managing restaurant data.
+- **Reverb**: Real-time event broadcasting system used for order notifications.
+- **Breez**: Background job management for tasks such as processing orders and sending notifications.
+
+## Database Architecture
+
+You can view the database schema for the project here:  
+[Database Schema](https://dbdiagram.io/d/67528b17e9daa85acadaf66a)
+
+## Login Credentials
+
+### Admin Login
+- Email: `admin@example.com`
+- Password: `adminpassword`
+
+### Waiter Login
+- Email: `waiter@example.com`
+- Password: `waiterpassword`
+
+### Cashier Login
+- Email: `cashier@example.com`
+- Password: `cashierpassword`
+
+### Chef Login
+- Email: `chef@example.com`
+- Password: `chefpassword`
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Restaurant Management System is open-sourced software licensed under the **MIT license**.
+
+---
+
+For more details on configuration and extending the application, check the official [Laravel documentation](https://laravel.com/docs).
+
+If you encounter any issues or have questions, feel free to open an issue on the [GitHub repository](https://github.com/rasandilikshana/restaurant-system).
+
+---
